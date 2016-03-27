@@ -1,5 +1,21 @@
 <?php
 
+add_filter( 'product_type_selector', 'cartible_product_type_selector', 10, 2 );
+ 
+/**
+ * Remove product types we do not want to be shown.
+ */
+function cartible_product_type_selector( $product_types ) {
+  unset( $product_types['grouped'] );
+  unset( $product_types['external'] );
+  unset( $product_types['simple'] );
+  unset( $product_types['variable'] );
+ 
+  return $product_types;
+}
+
+
+// Add custom product fields
 function woo_add_custom_general_fields() {
 
   global $woocommerce, $post;
