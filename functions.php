@@ -285,3 +285,6 @@ function sb_woo_remove_reviews_tab($tabs) {
 
  return $tabs;
 }
+
+//Disable the SKU on each product from being shown
+add_filter( 'wc_product_sku_enabled', '__return_false' );
