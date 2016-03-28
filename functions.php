@@ -276,3 +276,12 @@ function film_create_custom_product_type(){
         }
     }
 }
+
+//Disable the reviews tab
+add_filter( 'woocommerce_product_tabs', 'sb_woo_remove_reviews_tab', 98);
+function sb_woo_remove_reviews_tab($tabs) {
+
+ unset($tabs['reviews']);
+
+ return $tabs;
+}
