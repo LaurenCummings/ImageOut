@@ -79,6 +79,59 @@ $tag_count = sizeof( get_the_terms( $post->ID, 'product_tag' ) );
 		?>
 	</div>
 
+  <?php
+        $bundled_items = $product->get_bundled_items();
+        if ( $bundled_items ) {
+            echo '<table class="yith-wcpb-product-bundled-items">';
+            foreach ( $bundled_items as $bundled_item ) {
+                /**
+                 * @var YITH_WC_Bundled_Item $bundled_item
+                 */
+                $bundled_product = $bundled_item->get_product();
+                $bundled_post    = $bundled_product->get_post_data();
+                $quantity        = $bundled_item->get_quantity();
+                ?>
+                <div class="film">
+                        <h3><?php echo $bundled_product->get_title() ?></h3>
+
+                        <div class="film_image"><?php echo $bundled_product->get_image() ?></div>
+
+                        <h3><a href="<?php echo $bundled_post->_website; ?>">Official Website</a></h3>
+
+                        <h3><?php echo $bundled_post->_film_details; ?></h3>
+
+                        <h3>| Directed by: <?php echo $bundled_post->_director; ?></h3>
+
+                        <h3><?php echo $bundled_post->_language_note; ?></h3>
+
+						<p><?php echo $bundled_post->_description; ?></p>
+
+						<h2>AWARDS/ACCOLADES</h2>
+
+						<p><?php echo $bundled_post->_awards; ?></p>
+
+                        <?php
+                        if ( $bundled_product->managing_stock() ) {
+                            if ( $bundled_product->has_enough_stock( $quantity ) && $bundled_product->is_in_stock() ) {
+                                echo '<div class="yith-wcpb-product-bundled-item-instock">' . __( 'In stock', 'woocommerce' ) . '</div>';
+                            } else {
+                                echo '<div class="yith-wcpb-product-bundled-item-outofstock">' . __( 'Out of stock', 'woocommerce' ) . '</div>';
+                            }
+                        }
+                        ?>
+
+                </div>
+                <?php
+            }
+            echo '</table>';
+        }
+        ?>
+
+
+	<div class="community_partner">
+		<h2>COMMUNITY PARTNER</h2>
+			<?php echo get_post_meta( get_the_ID(), '_community_partner', true ); ?>
+	</div>
 
 
 	<?php echo $product->get_categories( ', ', '<span class="posted_in">' . _n( 'Category:', 'Categories:', $cat_count, 'woocommerce' ) . ' ', '</span>' ); ?>
