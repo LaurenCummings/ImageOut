@@ -82,7 +82,7 @@ $tag_count = sizeof( get_the_terms( $post->ID, 'product_tag' ) );
   <?php
         $bundled_items = $product->get_bundled_items();
         if ( $bundled_items ) {
-            echo '<table class="yith-wcpb-product-bundled-items">';
+            echo '<div class="yith-wcpb-product-bundled-items">';
             foreach ( $bundled_items as $bundled_item ) {
                 /**
                  * @var YITH_WC_Bundled_Item $bundled_item
@@ -99,6 +99,9 @@ $tag_count = sizeof( get_the_terms( $post->ID, 'product_tag' ) );
                         <h3><a href="<?php echo $bundled_post->_website; ?>">Official Website</a></h3>
 
                         <h3><?php echo $bundled_post->_film_details; ?></h3>
+
+                        <iframe src="<?php echo $bundled_post->_trailer; ?>"
+   width="560" height="315" frameborder="0" allowfullscreen></iframe>
 
                         <h3>| Directed by: <?php echo $bundled_post->_director; ?></h3>
 
@@ -123,7 +126,7 @@ $tag_count = sizeof( get_the_terms( $post->ID, 'product_tag' ) );
                 </div>
                 <?php
             }
-            echo '</table>';
+            echo '</div>';
         }
         ?>
 
